@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EstateHub Property Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#d8e3fb",
+                        "secondary": "#775a19",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#111c2d",
+                        "surface-container": "#eceef0",
+                        "on-primary-container": "#7c839b",
+                        "on-tertiary-container": "#79849a",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary-container": "#111c2d",
+                        "error": "#ba1a1a",
+                        "surface": "#f7f9fb",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "surface-tint": "#565e74",
+                        "secondary-fixed": "#ffdea5",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-fixed": "#dae2fd",
+                        "outline-variant": "#c6c6cd",
+                        "inverse-primary": "#bec6e0",
+                        "surface-bright": "#f7f9fb",
+                        "primary": "#000000",
+                        "on-error": "#ffffff",
+                        "outline": "#76777d",
+                        "primary-fixed-dim": "#bec6e0",
+                        "background": "#f7f9fb",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "on-background": "#191c1e",
+                        "secondary-container": "#fed488",
+                        "on-secondary-fixed": "#261900",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#785a1a",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "tertiary-fixed-dim": "#bcc7de",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#3c475a",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#000000",
+                        "on-surface-variant": "#45464d",
+                        "secondary-fixed-dim": "#e9c176",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-dim": "#d8dadc",
+                        "primary-container": "#131b2e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "container-max": "1280px",
+                        "section-gap": "80px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "label-caps": ["Inter"],
+                        "display-lg": ["Playfair Display"],
+                        "body-md": ["Inter"],
+                        "price-display": ["Inter"],
+                        "headline-md": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "price-display": ["20px", { "lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col pt-16 pb-24 relative overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-primary/95 dark:bg-primary/95 font-headline-md text-headline-md text-on-primary dark:text-on-primary fixed top-0 w-full z-50 backdrop-blur-md shadow-md flex justify-between items-center h-16 px-margin-mobile">
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<span class="font-headline-md text-headline-md font-bold">EstateHub</span>
+</div>
+<div class="flex gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[24px] text-on-primary">favorite_border</span>
+</button>
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform text-label-caps font-label-caps font-bold px-3 py-1 bg-secondary text-on-secondary rounded-full">
+                Post Property
+            </button>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Gallery -->
+<div class="relative w-full h-[353px] md:h-[530px]">
+<img class="w-full h-full object-cover" data-alt="A wide-angle, highly detailed photograph of a luxurious, modern apartment interior in Gurgaon, India. Sunlight streams through expansive floor-to-ceiling windows, illuminating sleek minimalist furniture, rich hardwood floors, and subtle metallic accents. The lighting is natural and bright, enhancing the airy, spacious feel of the room. The color palette emphasizes soft neutrals with deep navy and gold highlights, matching a premium, modern-corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK15lGV7kD9mZxLUli0pTbnN-Sl11hc8yqBZihOZoIfGD4N8scWS7z0ZFJwf5RjFbuE6sq9H7tN40j-ahT5aQMMauuXRZmUfxwVmrC8JsL1_OE2-Z-nom7oY2oacH240eY5bLZZwiRNe771sQza8H6bvemkYMrfnMymZbMOt0ZAhTW1hSORPrlqgjWlq55k6K88M9YZNi665D9pufcvh-P_AljBopCp7bT-RMj_5TuuKSQrTKpEnu6Pg"/>
+<div class="absolute bottom-4 left-4 bg-primary/80 backdrop-blur-sm text-on-primary px-3 py-1 rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">photo_library</span>
+<span class="font-label-caps text-label-caps">1 / 12</span>
+</div>
+<div class="absolute top-4 right-4 bg-secondary text-on-secondary px-3 py-1 rounded-full flex items-center gap-1 shadow-md">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span class="font-label-caps text-label-caps">Verified</span>
+</div>
+</div>
+<div class="px-margin-mobile md:px-margin-desktop py-6 max-w-container-max mx-auto space-y-section-gap">
+<!-- Key Details -->
+<section class="space-y-4">
+<div>
+<h1 class="font-headline-sm text-headline-sm text-on-surface">3 BHK Luxury Apartment in Gurgaon</h1>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                        DLF Phase 5, Gurugram, Haryana
+                    </p>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-price-display text-price-display text-primary">₹1.45 Cr</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Est. EMI: ₹75,000/mo</span>
+</div>
+<div class="grid grid-cols-4 gap-2 border-y border-outline-variant py-4">
+<div class="flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-[24px] text-secondary mb-1">bed</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">3 Beds</span>
+</div>
+<div class="flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-[24px] text-secondary mb-1">shower</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">3 Baths</span>
+</div>
+<div class="flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-[24px] text-secondary mb-1">square_foot</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">1800 sq ft</span>
+</div>
+<div class="flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-[24px] text-secondary mb-1">stairs</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">5th Floor</span>
+</div>
+</div>
+</section>
+<!-- Description -->
+<section class="space-y-4">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Property Overview</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    Experience unparalleled luxury in this exquisitely furnished 3 BHK apartment located in the prestigious DLF Phase 5. Designed for the modern professional, this residence offers breathtaking city views, state-of-the-art smart home integration, and premium finishes throughout. The spacious open-plan living area is perfect for entertaining, seamlessly flowing into a designer kitchen equipped with top-tier appliances.
+                </p>
+<button class="font-label-caps text-label-caps text-secondary uppercase tracking-widest font-semibold hover:opacity-80 transition-opacity">Read More</button>
+</section>
+<!-- Amenities -->
+<section class="space-y-4">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Amenities</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary">pool</span>
+<span class="font-body-md text-body-md">Swimming Pool</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary">fitness_center</span>
+<span class="font-body-md text-body-md">Gymnasium</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary">local_parking</span>
+<span class="font-body-md text-body-md">Reserved Parking</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary">security</span>
+<span class="font-body-md text-body-md">24/7 Security</span>
+</div>
+</div>
+</section>
+<!-- Agent Profile -->
+<section class="space-y-4">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Listed By</h2>
+<div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] border border-surface-variant">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a well-dressed Indian real estate agent, wearing a sharp navy blue suit and a subtle gold tie. The agent is smiling confidently in a modern, brightly lit office environment with glass walls in the background. The lighting is soft and corporate, matching a premium, trustworthy brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMs0yQz7lby8S0iYzOBACjkKZlvqt1zsOxMivf0blcgryF0h4jIfwqnU_gJeIBFkawXexqSnrFfLpuLWDLuBmRUvRMjrnqqRb_PqrXjIW0DRzH7kXfPKw0B_Di1yd_NoEqC4P4fSanqIcg6Nw3AuMhuuKr2R4AKyVp1iB5xeGTfxVGfXqhE5kzif-3oEzuXdfmvAJYvg2PgMPxX7LkWdz_qY_MYRW9NnQi6HEJUg7o3vuK8ztFHsa-gw"/>
+</div>
+<div class="flex-grow">
+<h3 class="font-body-lg text-body-lg font-semibold flex items-center gap-1">
+                            Rohan Sharma
+                            <span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">EstateHub Premier Agent</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Sticky Footer Actions -->
+<div class="fixed bottom-0 w-full bg-white border-t border-outline-variant p-4 shadow-[0px_-4px_20px_rgba(15,23,42,0.1)] z-50 md:hidden">
+<div class="flex gap-3">
+<button class="flex-1 bg-surface-container-high text-on-surface font-body-md text-body-md font-semibold py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">call</span>
+                Call
+            </button>
+<button class="flex-[2] bg-primary text-on-primary font-body-md text-body-md font-semibold py-3 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-md">
+                Contact Agent
+            </button>
+</div>
+</div>
+</body></html>

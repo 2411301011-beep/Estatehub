@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EstateHub Search Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#d8e3fb",
+                    "secondary": "#775a19",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#111c2d",
+                    "surface-container": "#eceef0",
+                    "on-primary-container": "#7c839b",
+                    "on-tertiary-container": "#79849a",
+                    "surface-variant": "#e0e3e5",
+                    "tertiary-container": "#111c2d",
+                    "error": "#ba1a1a",
+                    "surface": "#f7f9fb",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#5d4201",
+                    "surface-tint": "#565e74",
+                    "secondary-fixed": "#ffdea5",
+                    "surface-container-low": "#f2f4f6",
+                    "primary-fixed": "#dae2fd",
+                    "outline-variant": "#c6c6cd",
+                    "inverse-primary": "#bec6e0",
+                    "surface-bright": "#f7f9fb",
+                    "primary": "#000000",
+                    "on-error": "#ffffff",
+                    "outline": "#76777d",
+                    "primary-fixed-dim": "#bec6e0",
+                    "background": "#f7f9fb",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-container-highest": "#e0e3e5",
+                    "inverse-surface": "#2d3133",
+                    "on-background": "#191c1e",
+                    "secondary-container": "#fed488",
+                    "on-secondary-fixed": "#261900",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#785a1a",
+                    "on-surface": "#191c1e",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "tertiary-fixed-dim": "#bcc7de",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#3c475a",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#000000",
+                    "on-surface-variant": "#45464d",
+                    "secondary-fixed-dim": "#e9c176",
+                    "on-primary-fixed": "#131b2e",
+                    "surface-dim": "#d8dadc",
+                    "primary-container": "#131b2e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "40px",
+                    "container-max": "1280px",
+                    "section-gap": "80px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-sm": ["Playfair Display"],
+                    "display-lg-mobile": ["Playfair Display"],
+                    "label-caps": ["Inter"],
+                    "display-lg": ["Playfair Display"],
+                    "body-md": ["Inter"],
+                    "price-display": ["Inter"],
+                    "headline-md": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "price-display": ["20px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+          font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Mobile safe area padding for bottom nav */
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-[100px] md:pb-0">
+<!-- TopAppBar (From JSON) -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-md shadow-sm bg-primary/95 text-on-primary">
+<div class="flex justify-between items-center h-16 px-margin-mobile w-full">
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-headline-md text-headline-md font-bold text-on-primary text-center flex-grow">EstateHub</div>
+<button class="text-on-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform font-body-md text-body-md">
+                Post Property
+            </button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="pt-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto md:hidden">
+<!-- Search Filters & Summary -->
+<section class="mb-6 flex flex-col gap-4">
+<!-- Filter Pills -->
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex items-center gap-1 bg-surface-container-high px-4 py-2 rounded-full font-label-caps text-label-caps text-on-surface whitespace-nowrap active:scale-95 transition-transform">
+<span>Gurgaon</span>
+<span class="material-symbols-outlined" style="font-size: 16px;">close</span>
+</button>
+<button class="flex items-center gap-1 bg-surface-container-high px-4 py-2 rounded-full font-label-caps text-label-caps text-on-surface whitespace-nowrap active:scale-95 transition-transform">
+<span>₹1Cr+</span>
+<span class="material-symbols-outlined" style="font-size: 16px;">close</span>
+</button>
+<button class="flex items-center gap-1 bg-secondary text-on-secondary px-4 py-2 rounded-full font-label-caps text-label-caps whitespace-nowrap active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined" style="font-size: 16px;">tune</span>
+<span>Filters</span>
+</button>
+</div>
+<!-- Results Summary & Sort -->
+<div class="flex justify-between items-end border-b border-outline-variant pb-2">
+<h1 class="font-headline-sm text-headline-sm text-primary">245 Properties found in Gurgaon</h1>
+<button class="flex items-center gap-1 text-on-surface-variant font-label-caps text-label-caps">
+<span>Sort by: Price (High to Low)</span>
+<span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+</button>
+</div>
+</section>
+<!-- Property List (Vertical Scroll) -->
+<section class="flex flex-col gap-6">
+<!-- Property Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] overflow-hidden hover:shadow-[0px_12px_32px_rgba(15,23,42,0.1)] transition-shadow">
+<div class="relative w-full aspect-video">
+<img class="w-full h-full object-cover" data-alt="A luxurious modern apartment interior in Gurgaon, India, featuring expansive floor-to-ceiling windows overlooking a vibrant city skyline at sunset. The living room is elegantly furnished with minimalist, high-end Italian leather sofas, sleek marble flooring, and sophisticated ambient lighting, embodying a premium, modern-corporate real estate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkw3uWQbvTnPjsJK0L63iQR0GxjoxfE3ES3FJNagcQlxd7MlJ2mgGxLGb3Z1bWe8whg17tvvdNQ4dgqb50hhJwwvbWmrH40Nk3T-7FzS73-f2gP-ewMkH82CdxA2LqPuZuaX6SjvQ4Hv7yKc12QSazm7SCF1R1ctvis_CxPfNBpirBRVph7qfr8NTd4sCNe9GfA2bpCfR3PyAaM7nk_NUCIHSeqaIbZlQTqAX81HSx_80jrqADPKqeIg"/>
+<!-- Verified Badge -->
+<div class="absolute top-4 left-4 bg-secondary text-on-secondary px-3 py-1 rounded-full flex items-center gap-1 shadow-md">
+<span class="material-symbols-outlined fill" style="font-size: 14px;">check_circle</span>
+<span class="font-label-caps text-label-caps">Verified</span>
+</div>
+<!-- Favorite -->
+<button class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur p-2 rounded-full text-on-surface hover:text-error transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Skyline Penthouse</h2>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 16px;">location_on</span> DLF Phase 5, Gurgaon
+                            </p>
+</div>
+<div class="text-right">
+<span class="font-price-display text-price-display text-primary block">₹4.50 Cr</span>
+</div>
+</div>
+<div class="flex gap-4 mt-2 font-label-caps text-label-caps text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined" style="font-size: 16px;">bed</span> 4 Beds</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined" style="font-size: 16px;">bathtub</span> 4 Baths</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined" style="font-size: 16px;">square_foot</span> 3200 sq.ft.</span>
+</div>
+</div>
+</article>
+<!-- Property Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] overflow-hidden hover:shadow-[0px_12px_32px_rgba(15,23,42,0.1)] transition-shadow">
+<div class="relative w-full aspect-video">
+<img class="w-full h-full object-cover" data-alt="A grand luxury villa exterior in a prestigious neighborhood of Gurgaon, India. The architecture is modern yet classical, featuring a pristine white facade, a manicured lawn, and a large private swimming pool illuminated by soft, warm evening lights, conveying exclusivity and high-net-worth real estate appeal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHgSyXp7PSCnMVD-rvrhlNA-vaQAqSeh6yo2DRICkU2ObiWyFEUd8ZT4SD6inJ3C_0dah30o50MUJTQa5L4Tiv6AsGv1STvmSy3BA5dVrRZbffZ2NBZjusBZTzumPpzTI0li3-8V-kedGjTotSrtdvRGXZkZX81sak33HU3gydOaoz4ibP0XafA4U7URwwwRuD7AySys0klVLV-l8ovZuTWsT1VE9wIpHhTbStwlm_gFUab2ltkDoHIQ"/>
+<!-- Verified Badge -->
+<div class="absolute top-4 left-4 bg-secondary text-on-secondary px-3 py-1 rounded-full flex items-center gap-1 shadow-md">
+<span class="material-symbols-outlined fill" style="font-size: 14px;">check_circle</span>
+<span class="font-label-caps text-label-caps">Verified</span>
+</div>
+<!-- Favorite -->
+<button class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur p-2 rounded-full text-on-surface hover:text-error transition-colors">
+<span class="material-symbols-outlined fill text-error">favorite</span>
+</button>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">The Heritage Villa</h2>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 16px;">location_on</span> Golf Course Extension, Gurgaon
+                            </p>
+</div>
+<div class="text-right">
+<span class="font-price-display text-price-display text-primary block">₹12.75 Cr</span>
+</div>
+</div>
+<div class="flex gap-4 mt-2 font-label-caps text-label-caps text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined" style="font-size: 16px;">bed</span> 5 Beds</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined" style="font-size: 16px;">bathtub</span> 6 Baths</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined" style="font-size: 16px;">square_foot</span> 6500 sq.ft.</span>
+</div>
+</div>
+</article>
+</section>
+</main>
+<!-- BottomNavBar (From JSON) - Mobile Only -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface border-t border-outline-variant shadow-[0px_-4px_20px_rgba(15,23,42,0.05)] md:hidden block">
+<div class="flex justify-around items-center h-20 pb-safe px-4 font-label-caps text-label-caps">
+<!-- Active Tab: Explore (closest match for Search Results) -->
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 hover:bg-surface-container-high transition-colors active:scale-90 transition-all">
+<span class="material-symbols-outlined mb-1">search</span>
+<span>Explore</span>
+</button>
+<!-- Inactive Tabs -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-90 transition-all">
+<span class="material-symbols-outlined mb-1">favorite</span>
+<span>Saved</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-90 transition-all">
+<span class="material-symbols-outlined mb-1">diversity_3</span>
+<span>Agents</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-90 transition-all">
+<span class="material-symbols-outlined mb-1">person</span>
+<span>Profile</span>
+</button>
+</div>
+</nav>
+</body></html>
