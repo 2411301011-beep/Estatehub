@@ -39,40 +39,41 @@ const Saved = () => {
     <MobileShell>
       
       {/* Header */}
-      <div className="bg-surface-container-lowest p-4 sticky top-[57px] z-30 border-b border-surface-container-high shadow-sm">
-        <h1 className="font-display font-bold text-xl text-on-surface">Saved Properties</h1>
-        <p className="text-outline text-xs mt-0.5">Your shortlisted dream homes and investments</p>
+      <div className="bg-surface-container-lowest p-6 rounded-3xl border border-surface-container-high shadow-sm mb-6">
+        <h1 className="font-display font-bold text-2xl text-on-surface">Saved Properties</h1>
+        <p className="text-outline text-xs sm:text-sm mt-1">Your shortlisted luxury homes and investment properties</p>
       </div>
 
       {/* Content */}
-      <div className="p-4 space-y-4">
-        {!isAuthenticated ? (
-          <EmptyState
-            icon="lock"
-            title="Sign in to view saved properties"
-            description="Create a free buyer account or sign in to keep track of your favorite properties across devices."
-            actionText="Sign In / Register"
-            onAction={() => navigate('/login', { state: { from: '/saved' } })}
-          />
-        ) : loading ? (
-          <>
-            <PropertySkeleton />
-            <PropertySkeleton />
-          </>
-        ) : savedProperties.length === 0 ? (
-          <EmptyState
-            icon="favorite"
-            title="No saved properties yet"
-            description="Tap the heart icon on any property card to save it here for quick access later."
-            actionText="Explore Properties"
-            actionLink="/search"
-          />
-        ) : (
-          savedProperties.map((prop) => (
+      {!isAuthenticated ? (
+        <EmptyState
+          icon="lock"
+          title="Sign in to view saved properties"
+          description="Create a free buyer account or sign in to keep track of your favorite properties across devices."
+          actionText="Sign In / Register"
+          onAction={() => navigate('/login', { state: { from: '/saved' } })}
+        />
+      ) : loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <PropertySkeleton />
+          <PropertySkeleton />
+          <PropertySkeleton />
+        </div>
+      ) : savedProperties.length === 0 ? (
+        <EmptyState
+          icon="favorite"
+          title="No saved properties yet"
+          description="Tap the heart icon on any property card to save it here for quick access later."
+          actionText="Explore Properties"
+          actionLink="/search"
+        />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {savedProperties.map((prop) => (
             <PropertyCard key={prop.id} property={prop} />
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
 
     </MobileShell>
   );

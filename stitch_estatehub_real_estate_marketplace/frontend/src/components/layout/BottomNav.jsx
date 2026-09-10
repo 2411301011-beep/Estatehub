@@ -11,7 +11,7 @@ const navItems = [
 
 const BottomNav = () => {
   return (
-    <nav className="absolute bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md border-t border-surface-container-high px-2 py-2 flex items-center justify-around">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-surface/95 backdrop-blur-md border-t border-surface-container-high px-2 py-2 flex items-center justify-around shadow-lg">
       {navItems.map((item) => (
         <NavLink
           key={item.path}

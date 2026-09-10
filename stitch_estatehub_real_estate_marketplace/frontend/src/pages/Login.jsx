@@ -31,9 +31,10 @@ const Login = () => {
   };
 
   return (
-    <MobileShell hideHeader>
-      <div className="p-6 pt-10 flex flex-col min-h-full justify-between">
-        <div>
+    <MobileShell>
+      <div className="py-12 px-4 max-w-md mx-auto w-full">
+        <div className="bg-surface-container-lowest p-8 rounded-3xl border border-surface-container-high shadow-xl">
+          
           {/* Top Brand Branding */}
           <div className="text-center mb-8">
             <div className="w-14 h-14 rounded-2xl bg-primary-container text-secondary mx-auto flex items-center justify-center mb-3 shadow-md">
@@ -96,15 +97,15 @@ const Login = () => {
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
-        </div>
 
-        <div className="mt-8 text-center pt-4 border-t border-surface-container-high">
-          <p className="text-xs text-outline">
-            Don't have an account?{' '}
-            <Link to="/register" state={{ from }} className="font-bold text-secondary hover:underline">
-              Create Buyer Account
-            </Link>
-          </p>
+          <div className="mt-8 text-center pt-4 border-t border-surface-container-high">
+            <p className="text-xs text-outline">
+              Don't have an account?{' '}
+              <Link to="/register" state={{ from }} className="font-bold text-secondary hover:underline">
+                Create Buyer Account
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </MobileShell>

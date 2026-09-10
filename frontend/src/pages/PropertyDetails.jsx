@@ -17,8 +17,7 @@ const PropertyDetails = () => {
   const [error, setError] = useState('');
   const [activeImgIndex, setActiveImgIndex] = useState(0);
 
-  // Inquiry Modal State
-  const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
+  // Inquiry Form State
   const [inquiryData, setInquiryData] = useState({
     name: user?.name || '',
     email: user?.email || '',
@@ -58,9 +57,9 @@ const PropertyDetails = () => {
 
   if (loading) {
     return (
-      <MobileShell hideHeader>
+      <MobileShell>
         <div className="p-4 space-y-4 animate-pulse">
-          <div className="h-64 bg-surface-container-high rounded-2xl w-full" />
+          <div className="h-96 bg-surface-container-high rounded-2xl w-full" />
           <div className="h-6 bg-surface-container-high rounded w-3/4" />
           <div className="h-4 bg-surface-container-low rounded w-1/2" />
         </div>
@@ -70,14 +69,14 @@ const PropertyDetails = () => {
 
   if (error || !property) {
     return (
-      <MobileShell hideHeader>
-        <div className="p-8 text-center">
-          <h2 className="font-display font-bold text-lg text-on-surface">Property Not Found</h2>
+      <MobileShell>
+        <div className="p-12 text-center">
+          <h2 className="font-display font-bold text-xl text-on-surface">Property Not Found</h2>
           <p className="text-outline text-xs mt-2">{error}</p>
 
           <button
             onClick={() => navigate('/')}
-            className="mt-6 px-4 py-2 bg-secondary text-on-secondary text-xs font-bold rounded-xl"
+            className="mt-6 px-6 py-2.5 bg-secondary text-on-secondary text-xs font-bold rounded-xl"
           >
             Return to Home
           </button>
@@ -121,252 +120,245 @@ const PropertyDetails = () => {
     : ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80'];
 
   return (
-    <MobileShell hideHeader>
+    <MobileShell activeCity={property.location?.city}>
       
-      {/* Top Floating Actions & Gallery Header */}
-      <div className="relative w-full aspect-[4/3] bg-black">
-        <img
-          src={images[activeImgIndex]}
-          alt={property.title}
-          className="w-full h-full object-cover transition-all duration-300"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 pointer-events-none" />
+      {/* Back Button & Actions */}
+      <div className="flex items-center justify-between mb-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-1 text-xs font-bold text-outline hover:text-on-surface transition-colors"
+        >
+          <span className="material-symbols-outlined text-lg">arrow_back</span>
+          <span>Back to Listings</span>
+        </button>
 
-        {/* Floating Top Nav */}
-        <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20">
-          <button
-            onClick={() => navigate(-1)}
-            className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-md text-white flex items-center justify-center hover:bg-black/60 transition-colors"
-          >
-            <span className="material-symbols-outlined text-xl">arrow_back</span>
-          </button>
-          <button
-            onClick={handleFavoriteToggle}
-            className={`w-9 h-9 rounded-full backdrop-blur-md flex items-center justify-center transition-colors ${
-              isFav ? 'bg-rose-500 text-white' : 'bg-black/40 text-white hover:bg-black/60'
-            }`}
-          >
-            <span className={`material-symbols-outlined text-xl ${isFav ? 'fill-current' : ''}`}>
-              favorite
-            </span>
-          </button>
-        </div>
-
-        {/* Gallery Image Counter & Selectors */}
-        {images.length > 1 && (
-          <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">
-            {activeImgIndex + 1} / {images.length}
-          </div>
-        )}
+        <button
+          onClick={handleFavoriteToggle}
+          className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors border ${
+            isFav
+              ? 'bg-rose-500 text-white border-rose-500'
+              : 'bg-surface-container-low text-on-surface border-surface-container-high hover:bg-surface-container'
+          }`}
+        >
+          <span className={`material-symbols-outlined text-base ${isFav ? 'fill-current' : ''}`}>
+            favorite
+          </span>
+          <span>{isFav ? 'Saved' : 'Save Property'}</span>
+        </button>
       </div>
 
-      {/* Gallery Thumbnails Strip */}
-      {images.length > 1 && (
-        <div className="flex gap-2 p-2 px-4 bg-surface-container-low overflow-x-auto no-scrollbar">
-          {images.map((img, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActiveImgIndex(idx)}
-              className={`w-16 h-12 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
-                activeImgIndex === idx ? 'border-secondary scale-95' : 'border-transparent opacity-70'
-              }`}
-            >
-              <img src={img} alt="" className="w-full h-full object-cover" />
-            </button>
-          ))}
-        </div>
-      )}
-
-      {/* Main Details Body */}
-      <div className="p-5 space-y-6">
+      {/* Main Grid Layout (Left Media & Info, Right Sidebar) */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        {/* Title, Badges & Price */}
-        <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="bg-primary text-on-primary text-[10px] font-semibold uppercase px-2.5 py-0.5 rounded-full">
-              {property.listing_type === 'rent' ? 'For Rent' : 'For Sale'}
-            </span>
-            {property.verified && (
-              <span className="bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
-                <span className="material-symbols-outlined text-xs">verified</span>
-                Verified Listing
-              </span>
+        {/* Left Column (Images, Title, Specs, Overview, Amenities) */}
+        <div className="lg:col-span-2 space-y-6">
+          
+          {/* Main Gallery Showcase */}
+          <div className="space-y-3">
+            <div className="relative w-full h-[320px] sm:h-[420px] bg-black rounded-3xl overflow-hidden shadow-lg">
+              <img
+                src={images[activeImgIndex]}
+                alt={property.title}
+                className="w-full h-full object-cover transition-all duration-300"
+              />
+              <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full">
+                {activeImgIndex + 1} / {images.length}
+              </div>
+            </div>
+
+            {/* Thumbnail Strip */}
+            {images.length > 1 && (
+              <div className="flex gap-3 overflow-x-auto no-scrollbar py-1">
+                {images.map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveImgIndex(idx)}
+                    className={`w-24 h-16 rounded-xl overflow-hidden shrink-0 border-2 transition-all ${
+                      activeImgIndex === idx ? 'border-secondary scale-95 shadow-md' : 'border-transparent opacity-70 hover:opacity-100'
+                    }`}
+                  >
+                    <img src={img} alt="" className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
             )}
           </div>
 
-          <h1 className="font-display font-bold text-xl text-on-surface leading-tight mt-1">
-            {property.title}
-          </h1>
+          {/* Title & Badges */}
+          <div className="bg-surface-container-lowest p-6 rounded-3xl border border-surface-container-high shadow-sm space-y-4">
+            <div className="flex items-center gap-2">
+              <span className="bg-primary text-on-primary text-xs font-semibold uppercase px-3 py-1 rounded-full">
+                {property.listing_type === 'rent' ? 'For Rent' : 'For Sale'}
+              </span>
+              {property.verified && (
+                <span className="bg-secondary-container text-on-secondary-container text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                  <span className="material-symbols-outlined text-sm">verified</span>
+                  Verified Listing
+                </span>
+              )}
+            </div>
 
-          <p className="text-outline text-xs mt-1 flex items-center gap-1">
-            <span className="material-symbols-outlined text-sm">location_on</span>
-            {property.location?.address}, {property.location?.city}
-          </p>
+            <h1 className="font-display font-bold text-2xl sm:text-3xl text-on-surface leading-tight">
+              {property.title}
+            </h1>
 
-          <div className="mt-3 pt-3 border-t border-surface-container-high flex items-baseline justify-between">
-            <div>
-              <span className="text-xs text-outline block">Price</span>
-              <span className="font-body font-bold text-2xl text-secondary tracking-tight">
-                {formatPrice(property.price, property.price_unit)}
+            <p className="text-outline text-xs sm:text-sm flex items-center gap-1.5 font-medium">
+              <span className="material-symbols-outlined text-secondary text-lg">location_on</span>
+              {property.location?.address}, {property.location?.city}
+            </p>
+
+            <div className="pt-4 border-t border-surface-container-high flex items-baseline justify-between">
+              <div>
+                <span className="text-xs text-outline block">Price</span>
+                <span className="font-body font-bold text-3xl text-secondary tracking-tight">
+                  {formatPrice(property.price, property.price_unit)}
+                </span>
+              </div>
+              <span className="text-xs font-bold text-on-surface bg-surface-container-low px-4 py-2 rounded-xl border border-surface-container-high">
+                {property.property_type?.toUpperCase()}
               </span>
             </div>
-            <span className="text-xs font-semibold text-on-surface-variant bg-surface-container-low px-3 py-1.5 rounded-xl border border-surface-container-high">
-              {property.property_type?.toUpperCase()}
-            </span>
           </div>
-        </div>
 
-        {/* Specs Grid */}
-        <div className="grid grid-cols-3 gap-3 bg-surface-container-low p-3.5 rounded-2xl border border-surface-container-high text-center">
-          <div>
-            <span className="material-symbols-outlined text-secondary text-xl block mb-0.5">bed</span>
-            <span className="font-semibold text-xs text-on-surface block">{property.bedrooms} Bedrooms</span>
-          </div>
-          <div>
-            <span className="material-symbols-outlined text-secondary text-xl block mb-0.5">bathtub</span>
-            <span className="font-semibold text-xs text-on-surface block">{property.bathrooms} Bathrooms</span>
-          </div>
-          <div>
-            <span className="material-symbols-outlined text-secondary text-xl block mb-0.5">square_foot</span>
-            <span className="font-semibold text-xs text-on-surface block">{formatArea(property.area_sqft)}</span>
-          </div>
-        </div>
-
-        {/* Overview Description */}
-        <div>
-          <h3 className="font-display font-semibold text-base text-on-surface mb-2">Overview</h3>
-          <p className="text-on-surface-variant text-xs leading-relaxed whitespace-pre-line">
-            {property.description}
-          </p>
-        </div>
-
-        {/* Amenities Grid */}
-        {property.amenities && property.amenities.length > 0 && (
-          <div>
-            <h3 className="font-display font-semibold text-base text-on-surface mb-3">Key Amenities</h3>
-            <div className="grid grid-cols-2 gap-2.5">
-              {property.amenities.map((am) => (
-                <div
-                  key={am}
-                  className="bg-surface-container-lowest p-2.5 rounded-xl border border-surface-container-high flex items-center gap-2 text-xs font-medium text-on-surface"
-                >
-                  <span className="material-symbols-outlined text-secondary text-base">check_circle</span>
-                  <span>{am}</span>
-                </div>
-              ))}
+          {/* Specs Bar */}
+          <div className="grid grid-cols-3 gap-4 bg-surface-container-lowest p-5 rounded-3xl border border-surface-container-high shadow-sm text-center">
+            <div>
+              <span className="material-symbols-outlined text-secondary text-2xl block mb-1">bed</span>
+              <span className="font-bold text-sm text-on-surface block">{property.bedrooms} Bedrooms</span>
+            </div>
+            <div>
+              <span className="material-symbols-outlined text-secondary text-2xl block mb-1">bathtub</span>
+              <span className="font-bold text-sm text-on-surface block">{property.bathrooms} Bathrooms</span>
+            </div>
+            <div>
+              <span className="material-symbols-outlined text-secondary text-2xl block mb-1">square_foot</span>
+              <span className="font-bold text-sm text-on-surface block">{formatArea(property.area_sqft)}</span>
             </div>
           </div>
-        )}
 
-        {/* Listed By Agent Card */}
-        <AgentContactCard
-          agent={property.agent}
-          onInquireClick={() => setIsInquiryModalOpen(true)}
-        />
+          {/* Overview */}
+          <div className="bg-surface-container-lowest p-6 rounded-3xl border border-surface-container-high shadow-sm">
+            <h3 className="font-display font-bold text-lg text-on-surface mb-3">Overview</h3>
+            <p className="text-on-surface-variant text-sm leading-relaxed whitespace-pre-line">
+              {property.description}
+            </p>
+          </div>
 
-      </div>
-
-      {/* Inquiry Modal */}
-      {isInquiryModalOpen && (
-        <div className="fixed inset-0 z-50 flex justify-center items-end sm:items-center bg-black/60 backdrop-blur-sm p-0 sm:p-4">
-          <div className="bg-surface-container-lowest w-full max-w-md rounded-t-3xl sm:rounded-3xl shadow-2xl p-5 overflow-hidden">
-            
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-surface-container-high">
-              <h3 className="font-display font-semibold text-base text-on-surface">Inquire About Listing</h3>
-              <button
-                onClick={() => setIsInquiryModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-outline hover:text-on-surface"
-              >
-                <span className="material-symbols-outlined text-base">close</span>
-              </button>
-            </div>
-
-            {inquirySuccess ? (
-              <div className="py-6 text-center space-y-3">
-                <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-                  <span className="material-symbols-outlined text-2xl">check</span>
-                </div>
-                <h4 className="font-display font-bold text-base text-on-surface">Inquiry Sent!</h4>
-                <p className="text-outline text-xs max-w-xs mx-auto">
-                  Thank you! The agent has received your request and will contact you shortly.
-                </p>
-                <button
-                  onClick={() => {
-                    setIsInquiryModalOpen(false);
-                    setInquirySuccess(false);
-                  }}
-                  className="mt-4 px-6 py-2.5 bg-secondary text-on-secondary rounded-xl text-xs font-bold"
-                >
-                  Done
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleInquirySubmit} className="space-y-3">
-                {inquiryError && (
-                  <div className="p-2.5 bg-error-container text-on-error-container rounded-xl text-xs">
-                    {inquiryError}
+          {/* Amenities */}
+          {property.amenities && property.amenities.length > 0 && (
+            <div className="bg-surface-container-lowest p-6 rounded-3xl border border-surface-container-high shadow-sm">
+              <h3 className="font-display font-bold text-lg text-on-surface mb-4">Key Amenities</h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {property.amenities.map((am) => (
+                  <div
+                    key={am}
+                    className="bg-surface-container-low p-3 rounded-2xl border border-surface-container-high flex items-center gap-2.5 text-xs font-semibold text-on-surface"
+                  >
+                    <span className="material-symbols-outlined text-secondary text-lg">check_circle</span>
+                    <span>{am}</span>
                   </div>
-                )}
+                ))}
+              </div>
+            </div>
+          )}
 
-                <div>
-                  <label className="block text-[11px] font-semibold text-outline mb-1">Your Full Name</label>
-                  <input
-                    type="text"
-                    required
-                    value={inquiryData.name}
-                    onChange={(e) => setInquiryData({ ...inquiryData, name: e.target.value })}
-                    className="w-full bg-surface-container-low border border-surface-container-high px-3 py-2 rounded-xl text-xs font-medium focus:outline-none focus:border-secondary"
-                  />
+        </div>
+
+        {/* Right Column Sticky Sidebar (Agent Info & Inquiry Form) */}
+        <div className="space-y-6">
+          <div className="sticky top-24 bg-surface-container-lowest p-6 rounded-3xl border border-surface-container-high shadow-lg space-y-6">
+            
+            {/* Agent Contact Card Header */}
+            <h3 className="font-display font-bold text-lg text-on-surface pb-3 border-b border-surface-container-high">
+              Contact Listing Agent
+            </h3>
+
+            <AgentContactCard
+              agent={property.agent}
+              onInquireClick={() => {}}
+            />
+
+            {/* Inquiry Form */}
+            <div className="pt-2">
+              <h4 className="font-display font-semibold text-sm text-on-surface mb-3">Send Inquiry</h4>
+
+              {inquirySuccess ? (
+                <div className="py-6 text-center space-y-3 bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center mx-auto">
+                    <span className="material-symbols-outlined text-xl">check</span>
+                  </div>
+                  <h4 className="font-display font-bold text-sm text-emerald-900">Inquiry Sent!</h4>
+                  <p className="text-emerald-700 text-xs">
+                    The agent has received your details and will contact you shortly.
+                  </p>
                 </div>
+              ) : (
+                <form onSubmit={handleInquirySubmit} className="space-y-3">
+                  {inquiryError && (
+                    <div className="p-3 bg-error-container text-on-error-container rounded-xl text-xs">
+                      {inquiryError}
+                    </div>
+                  )}
 
-                <div>
-                  <label className="block text-[11px] font-semibold text-outline mb-1">Email Address</label>
-                  <input
-                    type="email"
-                    required
-                    value={inquiryData.email}
-                    onChange={(e) => setInquiryData({ ...inquiryData, email: e.target.value })}
-                    className="w-full bg-surface-container-low border border-surface-container-high px-3 py-2 rounded-xl text-xs font-medium focus:outline-none focus:border-secondary"
-                  />
-                </div>
+                  <div>
+                    <label className="block text-[11px] font-bold text-outline mb-1">Your Full Name</label>
+                    <input
+                      type="text"
+                      required
+                      value={inquiryData.name}
+                      onChange={(e) => setInquiryData({ ...inquiryData, name: e.target.value })}
+                      className="w-full bg-surface-container-low border border-surface-container-high px-3 py-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-secondary"
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-[11px] font-semibold text-outline mb-1">Phone Number</label>
-                  <input
-                    type="tel"
-                    required
-                    value={inquiryData.phone}
-                    onChange={(e) => setInquiryData({ ...inquiryData, phone: e.target.value })}
-                    className="w-full bg-surface-container-low border border-surface-container-high px-3 py-2 rounded-xl text-xs font-medium focus:outline-none focus:border-secondary"
-                  />
-                </div>
+                  <div>
+                    <label className="block text-[11px] font-bold text-outline mb-1">Email Address</label>
+                    <input
+                      type="email"
+                      required
+                      value={inquiryData.email}
+                      onChange={(e) => setInquiryData({ ...inquiryData, email: e.target.value })}
+                      className="w-full bg-surface-container-low border border-surface-container-high px-3 py-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-secondary"
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-[11px] font-semibold text-outline mb-1">Message</label>
-                  <textarea
-                    rows={3}
-                    required
-                    value={inquiryData.message}
-                    onChange={(e) => setInquiryData({ ...inquiryData, message: e.target.value })}
-                    className="w-full bg-surface-container-low border border-surface-container-high px-3 py-2 rounded-xl text-xs font-medium focus:outline-none focus:border-secondary"
-                  />
-                </div>
+                  <div>
+                    <label className="block text-[11px] font-bold text-outline mb-1">Phone Number</label>
+                    <input
+                      type="tel"
+                      required
+                      value={inquiryData.phone}
+                      onChange={(e) => setInquiryData({ ...inquiryData, phone: e.target.value })}
+                      className="w-full bg-surface-container-low border border-surface-container-high px-3 py-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-secondary"
+                    />
+                  </div>
 
-                <div className="pt-2">
+                  <div>
+                    <label className="block text-[11px] font-bold text-outline mb-1">Message</label>
+                    <textarea
+                      rows={3}
+                      required
+                      value={inquiryData.message}
+                      onChange={(e) => setInquiryData({ ...inquiryData, message: e.target.value })}
+                      className="w-full bg-surface-container-low border border-surface-container-high px-3 py-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-secondary"
+                    />
+                  </div>
+
                   <button
                     type="submit"
                     disabled={inquirySubmitting}
                     className="w-full py-3 bg-secondary text-on-secondary rounded-xl text-xs font-bold shadow-md hover:bg-secondary/90 disabled:opacity-50 transition-all flex items-center justify-center gap-2"
                   >
-                    {inquirySubmitting ? 'Sending...' : 'Submit Inquiry'}
+                    {inquirySubmitting ? 'Sending...' : 'Send Inquiry to Agent'}
                   </button>
-                </div>
-              </form>
-            )}
+                </form>
+              )}
+            </div>
 
           </div>
         </div>
-      )}
+
+      </div>
 
     </MobileShell>
   );
