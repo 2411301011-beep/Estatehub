@@ -10,6 +10,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Saved from './pages/Saved';
 import Profile from './pages/Profile';
+import Admin from './pages/Admin';
+import PremiumPlans from './pages/PremiumPlans';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/saved" element={<Saved />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/plans" element={<PremiumPlans />} />
         </Routes>
       </Router>
     </AuthProvider>

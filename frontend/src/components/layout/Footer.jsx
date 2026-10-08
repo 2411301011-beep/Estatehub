@@ -34,7 +34,10 @@ const Footer = () => {
                 <Link to="/agents" className="hover:text-secondary transition-colors">Verified Agents</Link>
               </li>
               <li>
-                <Link to="/saved" className="hover:text-secondary transition-colors">Saved Properties</Link>
+                <Link to="/plans" className="hover:text-secondary transition-colors">★ Premium Membership Plans</Link>
+              </li>
+              <li>
+                <Link to="/admin" className="hover:text-secondary transition-colors">⚙️ Admin Portal (/admin)</Link>
               </li>
             </ul>
           </div>
@@ -76,6 +79,8 @@ const Footer = () => {
         <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-outline">
           <p>© {new Date().getFullYear()} EstateHub Real Estate. All rights reserved.</p>
           <div className="flex items-center gap-4">
+            <Link to="/admin" className="hover:text-on-surface">Admin Portal</Link>
+            <span>•</span>
             <span className="hover:text-on-surface cursor-pointer">Privacy Policy</span>
             <span>•</span>
             <span className="hover:text-on-surface cursor-pointer">Terms of Service</span>

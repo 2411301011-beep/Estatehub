@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 const CITIES = ['Gurgaon', 'Delhi', 'Noida', 'Mumbai'];
 
 const Header = ({ activeCity = 'Gurgaon', onCityChange }) => {
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const navLinks = [
@@ -14,6 +14,11 @@ const Header = ({ activeCity = 'Gurgaon', onCityChange }) => {
     { path: '/saved', label: 'Saved' },
     { path: '/agents', label: 'Agents' },
   ];
+
+  // Only include Premium Plans in nav if user is authenticated (or allow clicking to prompt sign in)
+  if (isAuthenticated) {
+    navLinks.push({ path: '/plans', label: '★ Premium Plans' });
+  }
 
   return (
     <header className="sticky top-0 z-40 bg-surface/95 backdrop-blur-md border-b border-surface-container-high shadow-sm">
@@ -45,6 +50,20 @@ const Header = ({ activeCity = 'Gurgaon', onCityChange }) => {
                 {link.label}
               </NavLink>
             ))}
+
+            {/* Dedicated Admin Portal Link (Unique URL: /admin) */}
+            <NavLink
+              to="/admin"
+              className={({ isActive }) =>
+                `text-xs font-semibold px-2.5 py-1 rounded-full border transition-all ${
+                  isActive
+                    ? 'bg-secondary/20 text-secondary border-secondary font-bold'
+                    : 'text-on-surface-variant border-transparent hover:border-outline-variant/60 hover:text-on-surface'
+                }`
+              }
+            >
+              ⚙️ Admin Portal
+            </NavLink>
           </nav>
         </div>
 
